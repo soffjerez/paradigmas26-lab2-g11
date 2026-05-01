@@ -1,0 +1,5 @@
+2026.05.01 19:59:30 INFO  Started: Metals version 1.6.7 in folders '/home/sofia/Escritorio/paradigmas/paradigmas26-lab2-g11' for client Visual Studio Code 1.116.0.
+2026.05.01 19:59:30 INFO  Memory monitor started
+2026.05.01 19:59:31 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+may 01, 2026 7:59:32 P. M. org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFORMACIÓN: Unsupported notification method: $/setTrace
