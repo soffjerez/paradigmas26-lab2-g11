@@ -20,6 +20,17 @@
  */
 object Dictionary {
 
+  private def assignClass(entity: String, entityType: String): NamedEntity = {
+    entityType match {
+      case "Person" => new Person(entity)
+      case "Organization" => new Organization(entity)
+      case "University" => new University(entity)
+      case "Place" => new Place(entity)
+      case "Technology" => new Technology(entity)
+      case "ProgrammingLanguage" => new ProgrammingLanguage(entity)
+    }
+  }    
+
   /**
    * Lee un archivo de diccionario y crea una lista de entidades del tipo indicado.
    *
@@ -38,7 +49,9 @@ object Dictionary {
    *
    */
   def loadFromFile(filePath: String, entityType: String): List[NamedEntity] = {
-    ???
+    val lines = FileIO.readLines(filePath)                                            // obtengo las lineas del archivo 
+    val data: List[NamedEntity] = lines.map( line => assignClass(line, entityType))   // para cada linea le creo una instancia de la clase que corresponde
+    data 
   }
 
   /**
@@ -50,6 +63,13 @@ object Dictionary {
    *
    */
   def loadAll(): List[NamedEntity] = {
-    ???
+    val people = loadFromFile("data/people.txt", "Person")                         // obtengo la lista de entidades para cada archivo 
+    val organizations = loadFromFile("data/organizations.txt", "Organization")
+    val universities = loadFromFile("data/universities.txt", "University")
+    val places = loadFromFile("data/places.txt", "Place")
+    val languages = loadFromFile("data/languages.txt", "ProgrammingLanguage")
+
+    val res = people ++ organizations ++ universities ++ places ++ languages
+    res 
   }
 }
