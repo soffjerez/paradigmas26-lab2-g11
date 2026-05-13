@@ -60,6 +60,9 @@ object Formatters {
    *     University: 2
    */
   def formatEntityStats(counts: Map[String, Int]): String = {
-    ???
+    val ordenadas = counts.toList.sortBy(-_._2)                 // convierto a lista y ordeno de mayor a menor
+    val header = "=== Estadísticas de entidades ===\n"
+    val format = ordenadas.map{case (clase, tamaño) => s"${clase}: ${tamaño}"}.mkString("\n")
+    header ++ format
   }
 }
