@@ -31,7 +31,16 @@ object Formatters {
    *   Si no se detectaron entidades, mostrar un mensaje indicándolo.
    */
   def formatNERResult(postTitle: String, entities: List[NamedEntity]): String = {
-    ???
+    // detecto las entidades de cada post individual tomando como referencia las entidades generales
+    val ent = Analyzer.detectEntities(postTitle, entities)
+    // mapeo para guardar el formato correcto de la entidad
+    val res = ent.map(e => "\t" + e.describe + "\n")
+
+    // devolver un print? cual hay
+    println(
+      s"Post: \"$postTitle\"\n"+
+        "Entidades detectadas:\n"+
+        {if (ent.nonEmpty){res.mkString} else {"\t (no se detectaron entidades) \n"}}).toString
   }
 
   /**

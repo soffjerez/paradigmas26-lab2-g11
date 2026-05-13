@@ -34,8 +34,24 @@ object Analyzer {
    *                    Person("Martin Odersky")
    *                  )
    */
-  def detectEntities(text: String, dictionary: List[NamedEntity]): List[NamedEntity] = {
-    ???
+  def detectEntities (text: String, dictionary: List [NamedEntity]): List[NamedEntity] = {
+    dictionary.filter { entity =>
+
+      //Convierte el texto del objeto a una version segura, para poder aplicar bien el regex
+      //tal que sin quote: "C++" haría problema
+      //con quote: "C++" sería texto normal
+      val escapedText = java.util.regex.Pattern.quote(entity.text)
+
+      // Detéctame solamente el texto del objeto SI Y SOLO SI no posee letras ni números antes de este
+      // (?<!\w antes y después del escapedText)
+      // (?i) ignora mayúsculas y minúsculas
+      // Con esto nos evitamos que se detecte "java" si el texto dice "javalalala"
+      val regex = s"(?i)(?<!\\w)$escapedText(?!\\w)".r
+
+      // Busca la primera coincidencia de la regex en el texto y si este existe o no,
+      // entonces devolverá la entidad o None
+      regex.findFirstIn(text).isDefined
+    }
   }
 
   /**
