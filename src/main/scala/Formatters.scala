@@ -39,10 +39,10 @@ object Formatters {
 
       s"""Post: "$postTitle"
 Entidades detectadas:
-$formattedEntities"""
+$formattedEntities\n"""
     } else {
       s"""Post: "$postTitle"
-  (sin entidades detectadas)"""
+  (sin entidades detectadas)\n"""
     }
   }
 
@@ -65,7 +65,7 @@ $formattedEntities"""
       counts.toList.sortBy(-_._2) // convierto a lista y ordeno de mayor a menor
     val header = "=== Estadísticas de entidades ===\n"
     val format = ordenadas
-      .map { case (clase, tamaño) => s"${clase}: ${tamaño}" }
+      .map { case (clase, tamaño) => s"${clase}: ${tamaño}\n" }
       .mkString("\n")
     header ++ format
   }
